@@ -72,6 +72,54 @@ body {
 /*
  * Footer
  */
-.mastfoot {
-    color: rgba(255, 255, 255, .5);
+footer {
+
+}
+
+.control-btns {
+    margin: 1em 0 2em 0;
+}
+
+#mute {
+    position: fixed;
+    right: 45px;
+    bottom: 45px;
+    cursor: pointer;
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+}
+
+#mute span {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#mute span img {
+    height: 40px;
+    width: 40px;
+}
+
+.mute-icon {
+    display: none;
+}
+
+.unmute-icon {
+    display: block;
+}
+
+#canvas-container {
+    position: relative;
+    padding: 100px 0 0 0;
+}
+
+#canvas-container #pointer {
+    position: absolute;
+    top: 0;
+    left: 281px;
+    right: 0;
+    z-index: 50;
+    width: 80px;
+    /* margin: auto; */
 }

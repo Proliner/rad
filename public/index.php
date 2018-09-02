@@ -8,39 +8,52 @@
     <title>Rad van lunch</title>
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 </head>
 <body>
 
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div id="mute">
+    <span class="mute-icon">
+        <img id="toggle-audio-btn" src="img/mute.svg" alt="">
+    </span>
+    <span class="unmute-icon">
+        <img src="img/unmute.svg" alt="">
+    </span>
+</div>
 
-    <header class="masthead mb-auto">
-        <audio id="myAudio" src="audio/song.mp3" preload="auto">
-            Your browser does not support the audio element.
-        </audio>
-        <a onClick="togglePlay()">Click here to hear.</a>
-    </header>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column text-center">
+
+    <header class="masthead mb-auto"></header>
 
     <main role="main" class="inner cover">
         <h1 class="cover-heading">Rad van de middag lunch</h1>
-        <p>Kan je geen keuzen maken in de middag lunch? Geen nood gebruik het rad van de middag lunch!</p>
+        <p>Kan je geen keuzen maken in de middag lunch? Geen nood, Geef een draai!</p>
 
-        <canvas id='canvas' width='440' height='470'>
-            Canvas not supported, use another browser.
-        </canvas>
-
-        <div class="row">
-            <div>
-                <button id="startButton" type="button" class="btn btn-primary" onclick="theWheel.startAnimation(); this.disabled=true;">Spin het rad!</button>
-                <button type="button" class="btn btn-outline-primary" href="javascript:void(0);" onclick="theWheel.stopAnimation(); theWheel.rotationAngle=0; theWheel.draw(); startButton.disabled=false;">Reset</button>
+        <div class="row control-btns">
+            <div class="w-100">
+                <button id="startButton" type="button" class="btn btn-primary">Spin het rad!</button>
+                <button id="resetButton" type="button" class="btn btn-outline-primary" href="javascript:void(0);">
+                    Reset
+                </button>
             </div>
         </div>
 
+        <div id="canvas-container">
+            <canvas id='canvas' width='440' height='470'>
+                Canvas not supported, use another browser.
+            </canvas>
+            <img id="pointer" src="img/point.png" alt="pointer"/>
+        </div>
+        
     </main>
 
-    <footer class="mastfoot mt-auto">
-
+    <footer class="mt-auto">
+        <audio id="myAudio" src="audio/song.mp3" preload="auto">
+            Your browser does not support the audio element.
+        </audio>
+        <!--        <a class="btn btn-link" id="toggle-audio-btn">Click here to hear.</a>-->
     </footer>
 
 </div>
@@ -49,7 +62,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.﻿cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>﻿
+<script src="https://cdnjs.﻿cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+﻿
 <script src="js/winwheel.js"></script>
 <script src="js/app.js"></script>
 

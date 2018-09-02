@@ -1,6 +1,20 @@
-let startButton = document.getElementById('startButton');
+window.addEventListener('load', init);
 
-let theWheel = new Winwheel({
+var theWheel;
+var startButton = document.getElementById('startButton');
+var resetButton = document.getElementById('resetButton');
+var myAudio = document.getElementById("myAudio");
+var tick = new Audio('../audio/tick.mp3');  // Create audio object and load desired file.
+var toggleAudioBtn = document.getElementById('mute');
+var mute = false;
+
+function init() {
+    toggleAudioBtn.addEventListener('click', togglePlay);
+    startButton.addEventListener('click', startWheel);
+    resetButton.addEventListener('click', resetWheel);
+}
+
+theWheel = new Winwheel({
     'textMargin': 25,
     'textAlignment': 'center',
     'outerRadius': 220,
@@ -17,30 +31,77 @@ let theWheel = new Winwheel({
     'animation':
         {
             'type': 'spinToStop',
-            'duration': 20,
+            'duration': 10,
             'spins': 5,
-            'callbackSound': playSound,    // Specify function to call when sound is to be triggered.
-            'soundTrigger': 'pin'         // Pins trigger the sound for this animation.
+            'callbackSound': playTick,    // Specify function to call when sound is to be triggered.
+            'soundTrigger': 'pin',         // Pins trigger the sound for this animation.
+            // 'callbackFinished': stopSound
         },
     'pins':    // Display pins, and if desired specify the number.
         {
-            'number': 16
+            'number': 24
         }
 });
 
-let audio = new Audio('../audio/tick.mp3');  // Create audio object and load desired file.
+function playTick() {
 
-function playSound() {
     // Stop and rewind the sound (stops it if already playing).
-    audio.pause();
-    audio.currentTime = 0;
+    tick.pause();
+    tick.currentTime = 0;
 
     // Play the sound.
-    audio.play();
+    tick.play();
 }
 
-let myAudio = document.getElementById("myAudio");
-
-function togglePlay() {
-    return myAudio.paused ? myAudio.play() : myAudio.pause();
+// stop music
+function stopSound() {
+    myAudio.pause();
+    myAudio.currentTime = 0;
 }
+
+/**
+ * toggle the music
+ * @returns {any}
+ */
+const togglePlay = () => {
+
+    let muteButton = document.getElementsByClassName('mute-icon')[0];
+    let unMuteButton = document.getElementsByClassName('unmute-icon')[0];
+
+    if(myAudio.paused) {
+        muteButton.style.display = 'none';
+        unMuteButton.style.display = 'block';
+        mute = false;
+        return myAudio.play();
+    } else {
+        unMuteButton.style.display = 'none';
+        muteButton.style.display = 'block';
+        mute = true;
+        return myAudio.pause();
+    }
+};
+
+const startWheel = () => {
+    //start music
+    if(!mute) {
+        myAudio.play();
+    }
+    //start wheel animation
+    theWheel.startAnimation();
+    //disable start button
+    startButton.disabled = true;
+};
+
+const resetWheel = () => {
+    //reset wheel
+    theWheel.stopAnimation();
+    theWheel.rotationAngle = 0;
+    theWheel.draw();
+
+    //make the start button clickable
+    startButton.disabled = false;
+
+    //reset music
+    myAudio.pause();
+    myAudio.currentTime = 0;
+};
