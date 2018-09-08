@@ -7,6 +7,7 @@ var myAudio = document.getElementById("myAudio");
 var tick = new Audio('../audio/tick.mp3');  // Create audio object and load desired file.
 var toggleAudioBtn = document.getElementById('mute');
 var mute = false;
+var reset = false;
 
 function init() {
     toggleAudioBtn.addEventListener('click', togglePlay);
@@ -18,28 +19,30 @@ theWheel = new Winwheel({
     'textMargin': 25,
     'textAlignment': 'center',
     'outerRadius': 220,
+    'lineWidth': 0,
     // 'innerRadius': 90,
-    'numSegments': 5,
+    'numSegments': 4,
+    // 'drawMode': 'segmentImage',
+    // 'imageDirection' : 'E',
     'segments':
         [
-            {'fillStyle': '#2fb2ea', 'text': 'Albert Heijn'},
-            {'fillStyle': '#f2f2ec', 'text': '\'t Smoske'},
-            {'fillStyle': '#ef9716', 'text': 'Lunchbox'},
-            {'fillStyle': '#018500', 'text': 'McDonald\'s'},
-            {'fillStyle': '#e70e39', 'text': 'Domino\'s Pizza'}
+            {'textFontFamily': 'Roboto Mono', 'fillStyle': '#169ee2', 'text': 'Albert Heijn'},
+            {'textFontFamily': 'Roboto Mono', 'fillStyle': '#f2f2ec', 'text': '\'t Smoske'},
+            {'textFontFamily': 'Roboto Mono', 'fillStyle': '#feca30', 'text': 'McDonald\'s'},
+            {'textFontFamily': 'Roboto Mono', 'fillStyle': '#dc153a', 'text': 'Domino\'s'}
         ],
     'animation':
         {
             'type': 'spinToStop',
-            'duration': 10,
-            'spins': 5,
+            'duration': 15,
+            'spins': 8,
             'callbackSound': playTick,    // Specify function to call when sound is to be triggered.
             'soundTrigger': 'pin',         // Pins trigger the sound for this animation.
-            // 'callbackFinished': stopSound
+            'callbackFinished': wheelFinished,
         },
     'pins':    // Display pins, and if desired specify the number.
         {
-            'number': 24
+            'number': 16
         }
 });
 
@@ -51,6 +54,13 @@ function playTick() {
 
     // Play the sound.
     tick.play();
+}
+
+function wheelFinished() {
+    if(!reset) {
+        reset = true;
+        alert("Het is geworden: " + theWheel.getIndicatedSegment().text + ", eetsmakkelijk!");
+    }
 }
 
 // stop music
@@ -68,7 +78,7 @@ const togglePlay = () => {
     let muteButton = document.getElementsByClassName('mute-icon')[0];
     let unMuteButton = document.getElementsByClassName('unmute-icon')[0];
 
-    if(myAudio.paused) {
+    if (myAudio.paused) {
         muteButton.style.display = 'none';
         unMuteButton.style.display = 'block';
         mute = false;
@@ -82,8 +92,10 @@ const togglePlay = () => {
 };
 
 const startWheel = () => {
+    //reset the message
+    reset = false;
     //start music
-    if(!mute) {
+    if (!mute) {
         myAudio.play();
     }
     //start wheel animation

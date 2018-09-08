@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rad van lunch</title>
+    <title>Rad voor de lunch</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -28,8 +28,8 @@
     <header class="masthead mb-auto"></header>
 
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">Rad van de middag lunch</h1>
-        <p>Kan je geen keuzen maken in de middag lunch? Geen nood, Geef een draai!</p>
+        <h1 class="cover-heading">Rad voor de lunch</h1>
+        <p>Kan jij geen keuze maken wat je 's middags gaat oppeuzelen? Geen nood, geef harde slinger aan het rad!</p>
 
         <div class="row control-btns">
             <div class="w-100">
@@ -41,7 +41,7 @@
         </div>
 
         <div id="canvas-container">
-            <canvas id='canvas' width='440' height='470'>
+            <canvas id='canvas' width='470' height='470'>
                 Canvas not supported, use another browser.
             </canvas>
             <img id="pointer" src="img/point.png" alt="pointer"/>
